@@ -8,8 +8,11 @@
 <!-- Sidebar -->
 <div class="w3-sidebar w3-bar-block w3-border-right" style="display:none" id="mySidebar">
   <button onclick="w3_close()" class="w3-bar-item w3-large">Close &times;</button>
-  <a href="<?php echo base_url()?>Pret/indexPret" class="w3-bar-item w3-button">Prêt</a>
-  <a href="<?php echo base_url()?>ORR/indexORR" class="w3-bar-item w3-button">OR</a>
+    
+	      <a href="<?php echo base_url("Pret/indexPret");?>" class="list-group-item list-group-item-action bg-light">PRET</a>
+	      <a href="<?php echo base_url("Devise/indexDev");?>" class="list-group-item list-group-item-action bg-light">DEVISE</a>
+	      <a href="<?php echo base_url("ORR/indexORR");?>" class="list-group-item list-group-item-action bg-light">OR</a>
+	    
 </div>
 
 <!-- Page Content -->

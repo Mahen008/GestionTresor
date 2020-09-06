@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="author" content="">
-  <title>Prêt</title>
+  <title>Devise</title>
+
 </head>
 
 <body>
 
-	<?php include("partials/header.php"); ?>
+  <?php include("partials/header.php"); ?>
 
   <div class="d-flex" id="wrapper">
 
@@ -23,32 +24,23 @@
 
       <?php include("partials/navbar.php");?>
 
-	  <!-- start container -->
-      <div class="container-fluid">
-			 <!-- debut card-->
-		<div class="card">
-			<div class="card-header" style="height: 65px;">
-		        <h2 align="center" style="font-size: 1.5em;">LISTE PRET</h2>
-		    </div>
+    <!-- start container -->
+        <div class="container-fluid">
+       <!-- debut card-->
+         <div class="card">
+          <div class="card-header" style="height: 65px;">
+            <h2 align="center" style="font-size: 1.5em;">LISTE DEVISE</h2>
+        </div>
   <br>
   <div class="card-body">
     <div class="container-fluid">
       
-      <table class="table table-striped table-bordered">
-		<col style="width: 16%">
-		<col style="width: 31%">
-		<col style="width: 14%">
-		<col style="width: 14%">
-		<col style="width: 15%">
-		<col style="width: 10%">
+      <table class="table table-striped table-bordered" style="font-size: 0.87em; width: 100%;">
         <thead style="background-color: #333; color: #fff;">
           <tr>
-            <th>Id</th>
-            <th>Réference Prêt</th>
-			<th>Libellé Prêt</th>
-			<th>Date du prêt</th>
-			<th>Bailleur de fond</th>
-			<th>Numéro de compte</th>
+            <th>Numéro de compte</th>
+            <th>Devise</th>
+            <th>Numéro informatique</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -58,30 +50,28 @@
     </div>
   </div>
 
+  <?php include('partials/footer.php');?>
+
 <script type="text/javascript" language="javascript" >
 $(document).ready(function(){
   
   function load_data()
   {
     $.ajax({
-      url:"<?php echo base_url(); ?>Pret/load_data",
+      url:"<?php echo base_url(); ?>Devise/load_data",
       dataType:"JSON",
       success:function(data){
         var html = '<tr>';
-        html += '<td id="ref" contenteditable placeholder="Entrer Numéro de réference"></td>';
-        html += '<td id="libpret" contenteditable placeholder="Entrer le libellé"></td>';
-        html += '<td id="datpret" contenteditable></td>';
-        html += '<td id="bailleur" contenteditable></td>';
-        html += '<td id="numcpt" contenteditable></td>';
+        html += '<td id="numcpt" contenteditable placeholder="Entrer Numéro de compte"></td>';
+        html += '<td id="devise" contenteditable placeholder="Entrer le devise"></td>';
+        html += '<td id="ninf" contenteditable></td>';
         html += '<td><button type="button" name="btn_add" id="btn_add" class="btn btn btn-success"><span class="glyphicon glyphicon-plus"></span></button></td></tr>';
         for(var count = 0; count < data.length; count++)
         {
           html += '<tr>';
-          html += '<td class="table_data" data-row_id="'+data[count].id+'" data-column_name="ref" contenteditable>'+data[count].ref+'</td>';
-          html += '<td class="table_data" data-row_id="'+data[count].id+'" data-column_name="libpret" contenteditable>'+data[count].libpret+'</td>';
-          html += '<td class="table_data" data-row_id="'+data[count].id+'" data-column_name="datpret" contenteditable>'+data[count].datpret+'</td>';
-          html += '<td class="table_data" data-row_id="'+data[count].id+'" data-column_name="bailleur" contenteditable>'+data[count].bailleur+'</td>';
           html += '<td class="table_data" data-row_id="'+data[count].id+'" data-column_name="numcpt" contenteditable>'+data[count].numcpt+'</td>';
+          html += '<td class="table_data" data-row_id="'+data[count].id+'" data-column_name="devise" contenteditable>'+data[count].devise+'</td>';
+          html += '<td class="table_data" data-row_id="'+data[count].id+'" data-column_name="ninf" contenteditable>'+data[count].ninf+'</td>';
           html += '<td><button type="button" name="delete_btn" id="'+data[count].id+'" class="btn btn-danger btn_delete"><i class="fas fa-trash"></i></button></td></tr>';
         }
         $('tbody').html(html);
@@ -92,25 +82,23 @@ $(document).ready(function(){
   load_data();
 
   $(document).on('click', '#btn_add', function(){
-    var ref = $('#ref').text();
-    var libpret = $('#libpret').text();
-    var datpret = $('#datpret').text();
-    var bailleur = $('#bailleur').text();
     var numcpt = $('#numcpt').text();
-    if(ref == '')
+    var devise = $('#devise').text();
+    var ninf = $('#ninf').text();
+    if(numcpt == '')
     {
-      alert('Entrer Numéro de réference');
+      alert('Entrer Numéro de compte');
       return false;
     }
-    if(libpret == '')
+    if(devise == '')
     {
-      alert('Entrer le libellé');
+      alert('Entrer le devise');
       return false;
     }
     $.ajax({
-      url:"<?php echo base_url(); ?>Pret/insert",
+      url:"<?php echo base_url(); ?>Devise/insert",
       method:"POST",
-      data:{ref:ref, libpret:libpret, datpret:datpret, bailleur:bailleur, numcpt:numcpt},
+      data:{numcpt:numcpt, devise:devise, ninf:ninf},
       success:function(data){
         load_data();
       }
@@ -122,7 +110,7 @@ $(document).ready(function(){
     var table_column = $(this).data('column_name');
     var value = $(this).text();
     $.ajax({
-      url:"<?php echo base_url(); ?>Pret/update",
+      url:"<?php echo base_url(); ?>Devise/update",
       method:"POST",
       data:{id:id, table_column:table_column, value:value},
       success:function(data)
@@ -137,7 +125,7 @@ $(document).ready(function(){
     if(confirm("Voulez-vous vraiment supprimer?"))
     {
       $.ajax({
-        url:"<?php echo base_url(); ?>Pret/delete",
+        url:"<?php echo base_url(); ?>Devise/delete",
         method:"POST",
         data:{id:id},
         success:function(data){
@@ -149,4 +137,3 @@ $(document).ready(function(){
   
 });
 </script>
-<?php include('partials/footer.php');?>

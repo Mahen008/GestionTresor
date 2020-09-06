@@ -1,106 +1,68 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-	class Pret extends CI_Controller
-	{
-		public function __construct()
-		{
-			parent ::__construct();
-			$this->load->model("model_pret");
-			
-		}
+class Pret extends CI_Controller {
 
-		public function indexPret()
-		{
-			$affichpret = $this->model_pret->affichepret();
-			$this->load->view('indexPret',['affichpret' => $affichpret]);
-			
-		}
+	 public function __construct()
+	 {
+	  parent::__construct();
+	  $this->load->model('model_pret');
+	 }
 
-		//ajout
-		public function Ajouter()
-		{	
-			$this->form_validation->set_rules("re","Réference Prêt");
-			$this->form_validation->set_rules("libpre","Libellé Prêt");
-			$this->form_validation->set_rules("datpre","Date du prêt","required");
-			$this->form_validation->set_rules("bailleu","Bailleur de fond");
-			$this->form_validation->set_rules("numcp","Numéro de compte");
+	 function indexPret()
+	 {
+	  $this->load->view('indexPret');
+	 }
 
-			$this->form_validation->set_error_delimiters('<div class="text-danger">','</div>');
+	 function indexPr()
+	 {
+		$data['listPret'] = $this->model_pret->getListPret();
+		// var_dump($data);exit;
+	  	$this->load->view('indexPr',$data);
+	 }
 
-			if ($this->form_validation->run()) {
-				
-				$data = array(
-					"ref" => $this->input->post("re"),
-					"libpret" => $this->input->post("libpre"),
-					"datpret" => $this->input->post("datpre"),
-					"bailleur" => $this->input->post("bailleu"),
-					"numcpt" => $this->input->post("numcp")
-				);
+	 function load_data()
+	 {
+	  $data = $this->model_pret->load_data();
+	  echo json_encode($data);
+	 }
 
-				if ($this->model_pret->insererpret($data)) {
-					return redirect(base_url()."Pret/indexPret");
-				}
+	 function insert()
+	 {
+	  $data = array(
+	    'ref' => $this->input->post('ref'),
+		'libpret' => $this->input->post('libpret'),
+		'datpret' => $this->input->post('datpret'),
+		'bailleur' => $this->input->post('bailleur'),
+		'numcpt' => $this->input->post('numcpt')
+	  );
+	//   var_dump($data);exit;
+	  $this->model_pret->insert($data);
 
-				else{
-					return redirect(base_url()."Pret/indexPret");
-				}
+	  $response = array(
+			'success' => true,
+			'ref' => $this->input->post('ref'),
+			'libpret' => $this->input->post('libpret'),
+			'datpret' => $this->input->post('datpret'),
+			'bailleur' => $this->input->post('bailleur'),
+			'numcpt' => $this->input->post('numcpt'),
+			'lastVal' => $this->input->post('valPret')
+		);
+		echo json_encode($response);exit;
+	 }
 
-			}
-			else
-			{
-				$this->indexPret();
-			}
-		}
+	 function update()
+	 {
+	  $data = array(
+	   $this->input->post('table_column') => $this->input->post('value')
+	  );
 
-		public function editPret($id)
-		{
-			$unPret = $this->model_pret->getpret($id);
-			$this->load->view('editPret',['unPret' => $unPret]);
-		}
+	  $this->model_pret->update($data, $this->input->post('id'));
+	 }
 
-		public function updatePret($id)
-		{	
-			
-			$this->form_validation->set_rules("re","Réference Prêt");
-			$this->form_validation->set_rules("libpre","Libellé Prêt");
-			$this->form_validation->set_rules("datpre","Date du prêt","required");
-			$this->form_validation->set_rules("bailleu","Bailleur de fond");
-			$this->form_validation->set_rules("numcp","Numéro de compte");
-
-			$this->form_validation->set_error_delimiters('<div class="text-danger">','</div>');
-
-			if ($this->form_validation->run()) {
-				
-				$data = array(
-					"ref" => $this->input->post("re"),
-					"libpret" => $this->input->post("libpre"),
-					"datpret" => $this->input->post("datpre"),
-					"bailleur" => $this->input->post("bailleu"),
-					"numcpt" => $this->input->post("numcp")
-				);
-
-				if ($this->model_pret->updatePret($id,$data)) {
-					return redirect(base_url()."Pret/indexPret");
-				}
-
-				else{
-					return redirect(base_url()."Pret/indexPret");
-				}
-
-			}
-
-			else
-			{
-				$this->model_pret($id);
-			}
-		}
-
-		public function deletePret($id)
-		{
-			if ($this->model_pret->suppret($id)) {
-				return redirect("Pret/indexPret");
-			}
-		}
-	}
-?>
+	 function delete()
+	 {
+	  $this->model_pret->delete($this->input->post('id'));
+	 }
+}
+?> 

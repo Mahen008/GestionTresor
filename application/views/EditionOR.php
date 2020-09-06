@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Edition OR</title>
+	
 	</head>
 <body>
-	<div class="w3-dark">
-			<div class="row" class="card-header" style="background-color: #ecefed;">
-		  		<button class="w3-button w3-btn w3-xlarge" style="margin-left: 5px;" onclick="w3_open()">☰</button>
-		  		<h2 style="color: #111;font-size: 1.5em;"><b>EDITION OR</b></h2>
-		  	</div>
-		</div>
-
+	
 	<?php include("include/header.php");?>
 	<?php include("include/sidebar.php");?>
+    <style>
+        #police{
+            font-weight: normal;
+        }
+        ul.list-font{
+            font-size : 11px;
+        }
+    </style>
     
 	<div class="content" style="width: 1350px;">
 	
@@ -24,7 +26,7 @@
                         <div class="btn-group btn-group-lg">
                             <!-- <button class="btn btn-white">CSV</button> -->
                             <button class="btn btn-outline-secondary" onclick='window.print();'><i class="fa fa-print"></i> PDF</button>
-                            <a class="btn btn-outline-danger" href="<?php echo base_url()?>ORR/indexORR"><i class="fa fa-times"></i></a>
+                            <a class="btn btn-outline-danger" href="<?php echo base_url()?>ORR/indexEdition"><i class="fa fa-times"></i></a>
                             <!-- <button class="btn btn-white"> Print</button> -->
                         </div>
                     </div>
@@ -44,21 +46,21 @@
                                     <li>FARITANY <br> d ............</li>
                                     <li>______</li>
                                     <li>N°  1</li>
-                                    <li>(+261) 34 17 612 27</li>
                                 </ul>
                         </center>
                         </div>
                         <div class="col-sm-4 m-b-20">
                             <center>
                                 <ul class="list-unstyled mb-0">
-                                    <li>EXERCICE 2020</li>
+                                    <li>EXERCICE <span name="exercice"><?php echo set_value('exercice',$editionOROT->exercice);?></span></li>
                                     <li>______</li>
                                     <li>OPERATION TRESORERIE</li>
                                     <li>______</li>
                                     <li><h4><strong><b>ORDRE DE RECETTE</b></strong></h4></li>
-                                	<li>AU COMPTE: N°1621-08-150</li>
+                                	<li>AU COMPTE: N°<span name="numcpt"><?php echo set_value('numcpt',$editionOROT->numcpt);?></span></li>
+                                    <li>NI: <span name="id"><?php echo set_value('id',$editionOROT->id);?></span></li>
                                 	<br>
-                                	<li>EMPRUNT CONTRACTE AUPRES DE CHINE SUIVANT LA CONVENTION DU 14/06/19</li>
+                                	<li>EMPRUNT CONTRACTE AUPRES DE  <span name="bailleur"><?php echo set_value('bailleur',$editionOROT->bailleur);?></span> SUIVANT LA CONVENTION DU <span name="datpret"><?php echo set_value('datpret',$editionOROT->datpret);?></span></li>
                                     <br><br>
                                     <li>________</li>
                                 </ul>
@@ -66,12 +68,12 @@
                         </div>
                         <div class="col-sm-4 m-b-20">
                             <center>
-                                <ul class="list-unstyled mb-0">
-                                    <li>Modèle n°37</li>
+                                <ul class="list-unstyled mb-0 list-font">
+                                    <li>Modèle n°<span name="ninf"><?php echo set_value('ninf',$editionOROT->ninf);?></span></li>
                                     <li>______</li>
                                     <li>Art: <span>130</span></li>
                                     <li>de l'instruction</li>
-                                    <li>du 20 décembre 2020</span></li>
+                                    <li>du <span name="today"><?php echo set_value('today',$editionOROT->today);?></li>
                                     <li>______</li>
                                 </ul>
                             </center>
@@ -80,33 +82,33 @@
                     </div>
                     
                     <br>
-                     <div class="row">
-                        <center>
-                            <p> M. le <strong>AGENT COMPTABLE CENTRAL DU TRESOR ET DE LA DETTE PUBLIQUE</strong><br> est invité à recevoir de M <b>CHINE</b>la somme de <br> <b>(Ar.112 704 782 139.78) <br>CENT DOUZE MILLIARDS SEPT CENT QUATRE MILLIONS SEPT CENT QUATRE-VINGT-DEUX MILLE CENT TRENTE-NEUF ARIARY SOIXANTE-DIX-HUIT./~</b> 
+                     <div class="row" style="margin-left: 90px;">
+                        
+                            <p> M. l' <strong>AGENT COMPTABLE CENTRAL DU TRESOR ET DE LA DETTE PUBLIQUE</strong> est invité à recevoir de M <b><span name="bailleur"><?php echo set_value('bailleur',$editionOROT->bailleur);?></span></b> la somme <br> de <b>(Ar.<span name="montant"><?php echo set_value('montant',$editionOROT->mtordev * $editionOROT->tauxdevar);?></span>) <br><span class="montantEnLettre"></span>/~</b> 
                             </p>
-                        </center>
+                        
                             <p style="margin-left: 40px;">pour les motifs ci-après :
                             </p>
                     </div>
 
-                    	<table style="margin-left: 120px;">
+                    	<table style="margin-left: 90px;">
                             <br>
                             <tbody>
                                 <tr>
-                                    <td>Prise en charge des dépenses payées sur <br>fonds d'emprunt contracté auprès du <br>bailleur CHINE suivant Convention du <br>14/06/19. NI 00137300 <span class="float-right"></span></td>
+                                    <td>Prise en charge des dépenses payées sur <br>fonds d'emprunt contracté auprès du <br>bailleur <span name="bailleur"><?php echo set_value('bailleur',$editionOROT->bailleur);?></span> suivant Convention du <br><span name="datpret"><?php echo set_value('datpret',$editionOROT->datpret);?></span>. <span class="float-right"></span></td>
                                 </tr>
                                 <tr>
-                                    <td>Paiement direct<strong><br> N° GCL NO. (2019) 5</strong></td>
+                                    <td><span name="modepmt"><?php echo set_value('modepmt',$editionOROT->modepmt);?></span><strong><br> N° GCL NO. (2019) 5</strong></td>
                                 </tr>
                                 <tr>
-                                    <td><strong>Upgrading and Rehabilitation of the National <br>Road SA linking Ambilobe and Vohemer Project <br> (RNSA)</strong> <span class="float-right"></span></td>
+                                    <td><strong><span name="libpret"><?php echo set_value('libpret',$editionOROT->libpret);?></span></strong> <span class="float-right"></span></td>
                                 </tr>
                                 <tr>
                                     <td>devise      montant devise       taux<span class="float-right"></span></td>
                                 </tr>
                                 <tr>
-                                    <td>CNY         219 359 625.800   X   513.790=<span class="float-right"></td>
-                                    <td style=" border: solid black; width: 400px;height: 70px;"><center><strong>112 704 782 139.78</strong></center></span></td>
+                                    <td>CNY        <span name="mtordev"><?php echo set_value('mtordev',$editionOROT->mtordev);?></span>  X   <span name="tauxdevar"><?php echo set_value('tauxdevar',$editionOROT->tauxdevar);?></span> =<span class="float-right"></td>
+                                    <td style=" border: solid black; width: 400px;height: 70px;"><center><strong><span name="montants"><?php echo set_value('montants',($editionOROT->mtordev * $editionOROT->tauxdevar));?></span></strong></center></span></td>
                                 </tr>
                             </tbody>
                                     
@@ -127,16 +129,28 @@
         </div>
 
 	<?php include("include/footer.php");?>	
+    <script src="<?php echo base_url("assets/js/numberToWords.min.js")?>"></script>
 	<script type="text/javascript">
         $(document).ready(function() {
-            var table = $('#example').DataTable( {
-                lengthChange: false,
-                buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-            } );
+
+            let montant = $('span[name=montant]').text();
+            $('.montantEnLettre').text(numberToWords.toWords(montant));
+
+            // let formatter = new Int({
+            //     style : 'currency'
+            // });
+
+            // formatter.format($('span[name=montants]'));
+
+
+            // var table = $('#example').DataTable( {
+            //     lengthChange: false,
+            //     buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
+            // } );
          
-            table.buttons().container()
-                .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
-        } );
+            // table.buttons().container()
+            //     .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
+        });
     </script>		
 </body>
 </html>

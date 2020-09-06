@@ -50,13 +50,17 @@
         <div>
             	<center><h1><u>OPERATION DE TRESORIE</u></h1></center>
             	<div class="row">
-	            	<h5 style="margin-left: 40px;">Compte N° <strong>1621-05-57</strong> EMPRUNT CONTRACTE AUPRES DE : <strong>FAD</strong></h5>
+	            	<h5 style="margin-left: 40px;">Compte N° <strong><span name="bailleur"><?php echo set_value('numcpt',$editionOROT->numcpt);?></span></strong> EMPRUNT CONTRACTE AUPRES DE : <strong><span name="bailleur"><?php echo set_value('bailleur',$editionOROT->bailleur);?></span></strong></h5>
 	            	<h5 style="margin-left: 400px;">CREDIT</h5>
             	</div>
-            	<h5 style="margin-left: 120px;">EMISSION N° <strong>3</strong> DU</h5>
+            	<h5 style="margin-left: 120px;">EMISSION N° <strong><span name="numEmission"><?php echo set_value('numEmission',$editionOROT->numEmission);?></span></strong> DU</h5>
         </div>
         <br>
-        <table>
+        <table style="width: 90%;">
+            <col style="width: 20%">
+            <col style="width: 50%">
+            <col style="width: 10%">
+            <col style="width: 10%">
         	<tr>
         		<th>Numéros des ordres de recettes</th>
         		<th>Nom de la partie versante et objet du versement</th>
@@ -65,73 +69,73 @@
         	</tr>
         	<tr>
         		<td></td>
-        		<td><center><u>FAD</u></center><br><p>Prise en chage des dépenses payées sur fonds d'emprunt contracté auprès du bailleur FAD suivant Convention du 06/03/15.NI</p></td>
+        		<td><center><u><strong><span name="bailleur"><?php echo set_value('bailleur',$editionOROT->bailleur);?></span></strong></u></center><br><p>Prise en chage des dépenses payées sur fonds d'emprunt contracté auprès du bailleur <strong><span name="bailleur"><?php echo set_value('bailleur',$editionOROT->bailleur);?></span></strong> suivant Convention du 06/03/15.NI</p></td>
         		<td></td>
+        		<td></td>
+        	</tr>
+			<?php //$i=4; ?>
+			<?php foreach($editionOROTs as $row):?>
+				<?php $i = $row->id; ?>
+			<?php endforeach; ?>
+
+			<?php foreach($editionOROTs as $row):?>
+				<tr>
+					<td><center><?php echo $i++;?></center></td>
+					<td><strong><?php echo $row->libpret; ?></strong>   N° <strong><?php echo $row->ref; ?></strong>  <?php echo $row->modepmt; ?> </td>
+					<td><?php echo $row->mtordev*$row->tauxdevar; ?></td>
+					<td></td>
+				</tr>
+			<?php endforeach; ?>
+        	<tr>
+        		<td></td>
+        		<td class="text-right"><strong>EMISSION</strong></td>
+        		<td>
+					<?php foreach($editionOROTss as $row):?>
+						<?php echo $row->emission;?>
+					<?php endforeach; ?>
+				</td>
+        		<td></td>
+        	</tr>
+
+			<?php $antérieur = (float)2365626212.38; ?>
+			
+        	<tr>
+        		<td></td>
+        		<td class="text-right"><strong>ANTERIEURS</strong></td>
+        		<td><?php echo $antérieur; ?></td>
         		<td></td>
         	</tr>
         	<tr>
-        		<td>4</td>
-        		<td><strong>Projet d'Extion du Périmètre de</strong> N°5900150000251<br><strong>Bas-Mangoky (Projet de facilité</strong> Paiement direct<br><strong>d'appui à la transaction)-PEPBM</strong></td>
-        		<td>195 344 442.90</td>
+
+        		<td></td>
+        		<td class="text-right"><strong>CUMUL</strong></td>
+				<?php foreach($editionOROTss as $row):?>
+        			<td class="cumul"><?php echo $row->emission + $antérieur ;?></td>
+				<?php endforeach; ?>
         		<td></td>
         	</tr>
-        	<tr>
-        		<td>5</td>
-        		<td><strong>Projet d'Extion du Périmètre de</strong> N°5900150000251<br><strong>Bas-Mangoky (Projet de facilité</strong> Paiement direct<br><strong>d'appui à la transaction)-PEPBM</strong></td>
-        		<td>350 268 709.60</td>
-        		<td></td>
-        	</tr>
-        	<tr>
-        		<td>6</td>
-        		<td><strong>Projet d'Extion du Périmètre de</strong> N°5900150000251<br><strong>Bas-Mangoky (Projet de facilité</strong> Paiement direct<br><strong>d'appui à la transaction)-PEPBM</strong></td>
-        		<td>837 634 734.76</td>
-        		<td></td>
-        	</tr>
-        	<tr>
-        		<td>7</td>
-        		<td><strong>Projet d'Extion du Périmètre de</strong> N°5900150000251<br><strong>Bas-Mangoky (Projet de facilité</strong> Paiement direct<br><strong>d'appui à la transaction)-PEPBM</strong></td>
-        		<td>347 025 405.32</td>
-        		<td></td>
-        	</tr>
-        	<tr>
-        		<td></td>
-        		<td>EMISSION</td>
-        		<td>1 730 273 292.58</td>
-        		<td></td>
-        	</tr>
-        	<tr>
-        		<td></td>
-        		<td>ANTERIEURS</td>
-        		<td>2 365 626 212.38</td>
-        		<td></td>
-        	</tr>
-        	<tr>
-        		<td></td>
-        		<td>CUMUL</td>
-        		<td>4 095 899 504.96</td>
-        		<td></td>
-        	</tr>
+
         </table>
         <br><br>
         	<div  style="margin-left: 100px">
         		<p> Arrêté le présent bordereau à la somme de :</p>
-        		<strong>UN MILLIARD SEPT CENT TRENTE MILLIONS DEUX CENT SOIXANTE-TREIZE<br>MILLE DEUX CENT QUATRE-VINGT-DOUZE ARIARY CINQUANTE-HUITE./~</strong>
+        		<strong><span class="somme"></span>./~</strong>
         	</div>
         	<br>
         	<center>A ANTANANARIVO ,le</center>
         	<br><br><br>
         </font>
-	<?php include("include/footer.php");?>	
+	<?php include("include/footer.php");?>
+
+	<script src="<?php echo base_url("assets/js/numberToWords.min.js")?>"></script>	
+	<script type="text/javascript" src="http://www.google.com/jsapi"></script>
 	<script type="text/javascript">
         $(document).ready(function() {
-            var table = $('#example').DataTable( {
-                lengthChange: false,
-                buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-            } );
-         
-            table.buttons().container()
-                .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
-        } );
-    </script>		
+			let sumInLetter = numberToWords.toWords($('.cumul').text());
+			// alert(sumInLetter);
+			$(".somme").text(sumInLetter).css('text-transform','uppercase');
+			let somme = $(".somme").text();
+		});
+    </script>	
 </body>
 </html>
