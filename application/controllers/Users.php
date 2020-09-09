@@ -33,14 +33,16 @@
 					"password" => md5($this->input->post("pass"))
 				);
 
-				if ($this->model_user->insererUser($data)) {
+				$this->model_user->insererUser($data);
 
-					$this->session->set_flashdata("message","Ajout reussie");
+				$response = array(
+					'success' => true,
+					"log" => $this->input->post("log"),
+					"sex" => $this->input->post("sex"),
+					"pass" => md5($this->input->post("pass"))
+				);
 
-					redirect(base_url()."Users/affichageUser");
-					//echo "validation passé";
-				}
-				
+				echo json_encode($response);exit;
 			} 
 			else 
 			{
@@ -73,13 +75,11 @@
 				"password" => md5($this->input->post("pass"))
 				);
 
-				if ($this->model_user->updateUser($user_id,$data)) {
+				$this->model_user->updateUser($user_id,$data);
 
-					$this->session->set_flashdata("message","Modification reussie");
+				$this->session->set_flashdata("message","Utilisateur modifié avec succès");
 
-					redirect(base_url()."Users/affichageUser");
-				}
-				
+				redirect(base_url()."Users/affichageUser");
 			} 
 			else 
 			{
@@ -90,12 +90,11 @@
 		//supprimer un utilisateur
 		public function deleteUser($user_id)
 		{
-			if ($this->model_user->suppUser($user_id)) {
-
-				$this->session->set_flashdata("message","Suppression reussie");
-
-				return redirect(base_url()."Users/affichageUser");
-			}
+			$this->model_user->suppUser($user_id);
+			$response = [
+				'success' => true
+			];
+			echo json_encode($response);exit;
 		}
 	}
 ?>

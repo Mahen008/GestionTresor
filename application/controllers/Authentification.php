@@ -32,13 +32,12 @@ class Authentification extends CI_Controller {
 			$userExist = $this->model_user->verifUser($login,$password);
 
 			if($userExist){
-				return redirect(base_url()."Pret/indexPr");
+				return redirect(base_url()."Dashboard/display");
 			}
 			else {
-				$this->session->set_flashdata('message','Login ou mot de passe incorrect');
+				$this->session->set_flashdata('message','Votre login ou Votre mot de passe est incorrect');
 				return redirect("Authentification/index");
 			}
-			//echo "validation passé";
 		}
 		else
 		{

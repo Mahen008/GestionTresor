@@ -21,6 +21,13 @@ class Pret extends CI_Controller {
 	  	$this->load->view('indexPr',$data);
 	 }
 
+	 function editPret($id)
+	 {
+		$data['unPRET'] = $this->model_pret->getOnePret($id);
+		// var_dump($data);exit;
+	  	$this->load->view('editPret',$data);
+	 }
+
 	 function load_data()
 	 {
 	  $data = $this->model_pret->load_data();
@@ -46,23 +53,56 @@ class Pret extends CI_Controller {
 			'datpret' => $this->input->post('datpret'),
 			'bailleur' => $this->input->post('bailleur'),
 			'numcpt' => $this->input->post('numcpt'),
-			'lastVal' => $this->input->post('valPret')
 		);
 		echo json_encode($response);exit;
 	 }
 
-	 function update()
+	function update($id)
 	 {
-	  $data = array(
-	   $this->input->post('table_column') => $this->input->post('value')
-	  );
+		$data = array(
+			'ref' => $this->input->post('ref'),
+			'libpret' => $this->input->post('libpret'),
+			'datpret' => $this->input->post('datpret'),
+			'bailleur' => $this->input->post('bailleur'),
+			'numcpt' => $this->input->post('numcpt')
+		);
 
-	  $this->model_pret->update($data, $this->input->post('id'));
+		$this->model_pret->update($data,$id);
+
+		$this->session->set_flashdata("message","Prêt modifié avec succès");
+
+		redirect(base_url()."Pret/indexPr");
+
+		// $response = array(
+		// 	'success' => true,
+		// 	'ref' => $this->input->post('ref'),
+		// 	'libpret' => $this->input->post('libpret'),
+		// 	'datpret' => $this->input->post('datpret'),
+		// 	'bailleur' => $this->input->post('bailleur'),
+		// 	'numcpt' => $this->input->post('numcpt'),
+		// );
+		// echo json_encode($response);exit;
+	}
+
+	 function delete($id)
+	 {
+	  $this->model_pret->delete($id);
+		$response = [
+			'success' => true
+		];
+		echo json_encode($response);exit;
 	 }
 
-	 function delete()
-	 {
-	  $this->model_pret->delete($this->input->post('id'));
-	 }
+	public function recherchePret($query)
+	{
+		echo $this->model_pret->RecherchePret($query);
+	}
+
+	public function Actualiser()
+	{
+		echo $this->model_pret->Actualiser();
+	}
+
+	
 }
 ?> 

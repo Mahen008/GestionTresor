@@ -20,6 +20,7 @@
 		//afficher les utilisateurs
 		public function affichUser()
 		{
+			$this->db->order_by('user_id', 'DESC');
 			$users = $this->db->get("user");
 			return $users->result();
 		}
@@ -44,6 +45,12 @@
 		public function suppUser($user_id)
 		{
 			return $this->db->delete('user',['user_id' => $user_id]);
+		}
+
+		// count user
+		public function countUser()
+		{
+			echo $this->db->count_all('user'); 
 		}
 	}
 ?>

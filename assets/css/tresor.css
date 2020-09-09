@@ -1,0 +1,9 @@
+.bg-thead{
+    background-color: #333; 
+    color: #fff;
+}
+
+.list{  
+    background-color:#eee;  
+    cursor:pointer;  
+}

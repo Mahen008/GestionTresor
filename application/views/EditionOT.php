@@ -18,27 +18,22 @@
 		}
 		
 	</style>
-	<div class="w3-dark">
-			<div class="row" class="card-header" style="background-color: #ecefed;">
-		  		<button class="w3-button w3-btn w3-xlarge" style="margin-left: 5px;" onclick="w3_open()">☰</button>
-		  		<h2 style="color: #111;font-size: 1.5em;"><b>EDITION OT</b></h2>
-		  	</div>
+	<!-- <div>
+		<div class="row" class="card-header" style="background-color: #ecefed;">
+		  	<h2 style="color: #111;font-size: 1.5em;"><b>EDITION OT</b></h2>
 		</div>
+	</div> -->
 
-	<?php include("include/header.php");?>
-	<?php include("include/sidebar.php");?>
+	<?php include("partials/header.php");?>
     
 	<div class="content" style="width: 1350px;">
 	
                 <div class="row">
-                    <div class="col-sm-5 col-1">
-
-                    </div>
                     <div class="col-sm-7 col-8 text-right m-b-30">
                         <div class="btn-group btn-group-lg">
                             <!-- <button class="btn btn-white">CSV</button> -->
                             <button class="btn btn-outline-secondary" onclick='window.print();'><i class="fa fa-print"></i> PDF</button>
-                            <a class="btn btn-outline-danger" href="<?php echo base_url()?>ORR/indexORR"><i class="fa fa-times"></i></a>
+                            <a class="btn btn-outline-danger" href="<?php echo base_url()?>ORR/indexOR"><i class="fa fa-times"></i></a>
                             <!-- <button class="btn btn-white"> Print</button> -->
                         </div>
                     </div>
@@ -125,7 +120,7 @@
         	<center>A ANTANANARIVO ,le</center>
         	<br><br><br>
         </font>
-	<?php include("include/footer.php");?>
+	<?php include("partials/footer.php");?>
 
 	<script src="<?php echo base_url("assets/js/numberToWords.min.js")?>"></script>	
 	<script type="text/javascript" src="http://www.google.com/jsapi"></script>

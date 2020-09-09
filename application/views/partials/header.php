@@ -11,12 +11,13 @@
         <!-- Custom styles for this template -->
         <link href="<?php echo base_url("assets/css/simple-sidebar.css");?>" rel="stylesheet">
         <link href="<?php echo base_url("assets/css/style.css");?>" rel="stylesheet">
+        <link href="<?php echo base_url("assets/css/tresor.css");?>" rel="stylesheet">
         <link href="<?php echo base_url("assets/css/AdminLTE.min.css");?>" rel="stylesheet">
-        <link rel="stylesheet" href="<?php echo base_url("assets/bootstrap.min.css");?>">
-        <script src="<?php echo base_url("assets/jquery.min.js");?>"></script>
-        <script src="<?php echo base_url("assets/bootstrap.min.js");?>"></script>
-        <link href="<?php echo base_url("assets/css/jquery-ui.css");?>" rel="stylesheet">
-        <link href="<?php echo base_url("assets/css/examples.css");?>" rel="stylesheet">
+        <style>
+            body.body{
+                background : #f2f2f2;
+            }
+        </style>
     </head>
 
     <body>

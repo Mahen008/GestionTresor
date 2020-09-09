@@ -9,9 +9,16 @@ class ORR extends CI_Controller {
 	  $this->load->model('model_orot');
 	 }
 
-	 function indexORR()
+	//  function indexORR()
+	//  {
+	//   $this->load->view('indexORR');
+	//  }
+
+	 function indexOR()
 	 {
-	  $this->load->view('indexORR');
+		$data['listORs'] = $this->model_orot->listOrr();
+		// var_dump($data);exit;
+	  	$this->load->view('indexOR',$data);
 	 }
 
 	 function editionsOR()
@@ -23,8 +30,15 @@ class ORR extends CI_Controller {
 
 	 function indexEdition()
 	 {
-	  $affiche = $this->model_orot->getListORR();
-	  $this->load->view('indexEdition',['affiche' => $affiche]);
+	  $data['affiche'] = $this->model_orot->getListORR();
+	//   var_dump($data);exit;
+	  $this->load->view('indexEdition', $data);
+	 }
+
+	 function editORR($id)
+	 {
+	  	$data['unORR'] = $this->model_orot->listOneOrr($id);
+	  	$this->load->view('editORR', $data);
 	 }
 
 	 function load_data()
@@ -169,26 +183,66 @@ class ORR extends CI_Controller {
 		'exercice'   => $this->input->post('exercice'),
 		'mtordev'   => $this->input->post('mtordev'),
 		'tauxdevar'   => $this->input->post('tauxdevar'),
-		'mtorar'   => $this->input->post('mtorar'),
 		'modepmt'   => $this->input->post('modepmt')
 	  );
 
 	  $this->model_orot->insert($data);
+
+	  $response = array(
+			'success' => true,
+			'numcpt' => $this->input->post('numcpt'),
+			'numor'  => $this->input->post('numor'),
+			'numot_or'   => $this->input->post('numot_or'),
+			'exercice'   => $this->input->post('exercice'),
+			'mtordev'   => $this->input->post('mtordev'),
+			'tauxdevar'   => $this->input->post('tauxdevar'),
+			'modepmt'   => $this->input->post('modepmt')
+		);
+		echo json_encode($response);exit;
 	 }
 
-	 function update()
+	 function update($id)
 	 {
-	  $data = array(
-	   $this->input->post('table_column') => $this->input->post('value')
-	  );
+		$data = array(
+			'numcpt' => $this->input->post('numcpt'),
+			'numor'  => $this->input->post('numor'),
+			'numot_or'   => $this->input->post('numot_or'),
+			'exercice'   => $this->input->post('exercice'),
+			'mtordev'   => $this->input->post('mtordev'),
+			'tauxdevar'   => $this->input->post('tauxdevar'),
+			'modepmt'   => $this->input->post('modepmt')
+		  );
+	
+		$this->model_orot->update($data, $id);
 
-	  $this->model_orot->update($data, $this->input->post('id'));
+		$this->session->set_flashdata("message","ORR modifié avec succès");
+
+		redirect(base_url()."ORR/indexOR");
 	 }
 
-	 function delete()
-	 {
-	  $this->model_orot->delete($this->input->post('id'));
-	 }
+	function delete($id)
+	{
+	  $this->model_orot->delete($id);
+		$response = [
+			'success' => true
+		];
+		echo json_encode($response);exit;
+	}
 
+	// public function autocompleted($numcpt='1621-08-150')
+	public function autocompleted($numcpt)
+	{
+		echo $this->model_orot->autocompletionNumCompte($numcpt);
+	}
+
+	public function rechercheOrr($query)
+	{
+		echo $this->model_orot->RechercheOrr($query);
+	}
+
+	public function Actualiser()
+	{
+		echo $this->model_orot->Actualiser();
+	}
 }
 ?> 

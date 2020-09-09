@@ -5,8 +5,7 @@
 	</head>
 <body>
 	
-	<?php include("include/header.php");?>
-	<?php include("include/sidebar.php");?>
+	<?php include("partials/header.php");?>
     <style>
         #police{
             font-weight: normal;
@@ -128,7 +127,7 @@
            </font>
         </div>
 
-	<?php include("include/footer.php");?>	
+	<?php include("partials/footer.php");?>	
     <script src="<?php echo base_url("assets/js/numberToWords.min.js")?>"></script>
 	<script type="text/javascript">
         $(document).ready(function() {
@@ -136,20 +135,6 @@
             let montant = $('span[name=montant]').text();
             $('.montantEnLettre').text(numberToWords.toWords(montant));
 
-            // let formatter = new Int({
-            //     style : 'currency'
-            // });
-
-            // formatter.format($('span[name=montants]'));
-
-
-            // var table = $('#example').DataTable( {
-            //     lengthChange: false,
-            //     buttons: [ 'copy', 'excel', 'pdf', 'colvis' ]
-            // } );
-         
-            // table.buttons().container()
-            //     .appendTo( '#example_wrapper .col-sm-6:eq(0)' );
         });
     </script>		
 </body>

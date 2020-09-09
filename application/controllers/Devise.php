@@ -11,7 +11,15 @@ class Devise extends CI_Controller {
 
  function indexDev()
  {
-  $this->load->view('indexDev');
+    $data['listDevise'] = $this->model_devise->getListDevise();
+    $this->load->view('indexDev',$data);
+ }
+
+ //editer un devise
+ public function editDevise($id)
+ {
+    $data['unDevise'] = $this->model_devise->getOneDevise($id);
+    $this->load->view('editDevise',$data);
  }
 
  function load_data()
@@ -29,21 +37,40 @@ class Devise extends CI_Controller {
   );
 
   $this->model_devise->insert($data);
+
+  $response = [
+    'success' => true,
+     'numcpt' => $this->input->post('numcpt'),
+     'devise'  => $this->input->post('devise'),
+     'ninf'   => $this->input->post('ninf')
+  ];
+
+  echo json_encode($response);exit;
  }
 
- function update()
+ function update($id)
  {
-  $data = array(
-   $this->input->post('table_column') => $this->input->post('value')
-  );
+   $data = array(
+      'numcpt' => $this->input->post('numcpt'),
+      'devise'  => $this->input->post('devise'),
+      'ninf'   => $this->input->post('ninf')
+     );
 
-  $this->model_devise->update($data, $this->input->post('id'));
+   $this->model_devise->update($data, $id);
+
+   $this->session->set_flashdata("message","Devise modifié avec succès");
+
+	redirect(base_url()."Devise/indexDev");
  }
 
- function delete()
- {
-  $this->model_devise->delete($this->input->post('id'));
- }
+ function delete($id)
+	{
+	  $this->model_devise->delete($id);
+		$response = [
+			'success' => true
+		];
+		echo json_encode($response);exit;
+	}
  
 
 }

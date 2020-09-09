@@ -4,7 +4,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 
 <?php include("partials/header.php"); ?>
-<!-- login23:11-->
 <body>
   <div class="main-wrapper account-wrapper" style="background-color:#1C1B1E;" >
     <div class="account-page">
@@ -17,12 +16,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </center>
             </div>
               <?php if($msg = $this->session->flashdata('message')): ?>
-                <div class="btn-danger" style="line-height: 30px;" align="center">
+                <div class="btn-danger active text-white" style="line-height: 30px;" align="center">
                   <?php echo $msg;?>
                 </div>
               <?php endif; ?> 
                   <div class="form-group">
-                      <input type="text" name="log" autofocus="" class="form-control" placeholder="Login">
+                      <input type="text" name="log" class="form-control" placeholder="Login">
                         <span class="text-danger"><?php echo form_error("log");?></span>
                   </div>
                   <div class="form-group">
@@ -31,7 +30,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                   </div>
                      
                     <div class="form-group text-center">
-                      <button type="submit" class="btn btn-primary account-btn">Connect</button>
+                      <button type="submit" class="btn btn-primary account-btn">SE CONNECTER</button>
                     </div>  
           </form>
         </div>
